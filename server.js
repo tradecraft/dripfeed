@@ -35,7 +35,7 @@ app.get('/page/:page/:skip', routes.page);
 app.use("/", express.static(__dirname + "/public/"));
 
 // Start the server
-var server = http.createServer(app).listen(port, function() {
+var server = http.createServer(app).listen(port, function () {
   console.log('Express server listening on port ' + port);
 });
 
