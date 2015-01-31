@@ -6,7 +6,7 @@ var Tweet = require('./Tweet.react.js');
 module.exports = Tweets = React.createClass({
 
   // Render our tweets
-  render: function(){
+  render: function () {
 
     // Build list items of single tweet components using map
     var content = this.props.tweets.map(function (tweet) {
@@ -17,7 +17,9 @@ module.exports = Tweets = React.createClass({
 
     // Return ul filled with our mapped tweets
     return (
-      <ul className="tweets">{content}</ul>
+      <ul className="tweets">
+        {content}
+      </ul>
     )
 
   }
