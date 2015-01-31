@@ -1,24 +1,19 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var Tweets = require('./Tweets.react.js');
-var Loader = require('./Loader.react.js');
+var React           = require('react');
+var Tweets          = require('./Tweets.react.js');
+var Loader          = require('./Loader.react.js');
 var NotificationBar = require('./NotificationBar.react.js');
 
 // Export the TweetsApp component
 module.exports = TweetsApp = React.createClass({
 
   // Method to add a tweet to our timeline
-  addTweet: function(tweet){
+  addTweet: function (tweet) {
 
-    // Get current application state
-    var updated = this.state.tweets;
-
-    // Increment the unread count
-    var count = this.state.count + 1;
-
-    // Increment the skip count
-    var skip = this.state.skip + 1;
+    var updated = this.state.tweets;    // Get current application state
+    var count   = this.state.count + 1; // Increment the unread count
+    var skip    = this.state.skip + 1;  // Increment the skip count
 
     // Add tweet to the beginning of the tweets array
     updated.unshift(tweet);
@@ -29,15 +24,18 @@ module.exports = TweetsApp = React.createClass({
   },
 
   // Method to get JSON from server by page
-  getPage: function(page){
+  getPage: function (page) {
 
     // Setup our ajax request
-    var request = new XMLHttpRequest(), self = this;
+    var request = new XMLHttpRequest()
+    var self    = this;
+
+    // Open request
     request.open('GET', 'page/' + page + "/" + this.state.skip, true);
-    request.onload = function() {
+    request.onload = function () {
 
       // If everything is cool...
-      if (request.status >= 200 && request.status < 400){
+      if (request.status >= 200 && request.status < 400) {
 
         // Load our next page
         self.loadPagedTweets(JSON.parse(request.responseText));
@@ -50,19 +48,19 @@ module.exports = TweetsApp = React.createClass({
       }
     };
 
-    // Fire!
+    // Send it
     request.send();
 
   },
 
   // Method to show the unread tweets
-  showNewTweets: function(){
+  showNewTweets: function () {
 
     // Get current application state
     var updated = this.state.tweets;
 
     // Mark our tweets active
-    updated.forEach(function(tweet){
+    updated.forEach(function (tweet) {
       tweet.active = true;
     });
 
@@ -72,25 +70,25 @@ module.exports = TweetsApp = React.createClass({
   },
 
   // Method to load tweets fetched from the server
-  loadPagedTweets: function(tweets){
+  loadPagedTweets: function (tweets) {
 
     // So meta lol
     var self = this;
 
     // If we still have tweets...
-    if(tweets.length > 0) {
+    if (tweets.length > 0) {
 
       // Get current application state
       var updated = this.state.tweets;
 
       // Push them onto the end of the current tweets array
-      tweets.forEach(function(tweet){
+      tweets.forEach(function (tweet) {
         updated.push(tweet);
       });
 
       // This app is so fast, I actually use a timeout for dramatic effect
       // Otherwise you'd never see our super sexy loader svg
-      setTimeout(function(){
+      setTimeout(function () {
 
         // Set application state (Not paging, add tweets)
         self.setState({tweets: updated, paging: false});
@@ -106,7 +104,7 @@ module.exports = TweetsApp = React.createClass({
   },
 
   // Method to check if more tweets should be loaded, by scroll position
-  checkWindowScroll: function(){
+  checkWindowScroll: function () {
 
     // Get scroll pos & window data
     var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -114,7 +112,7 @@ module.exports = TweetsApp = React.createClass({
     var scrolled = (h + s) > document.body.offsetHeight;
 
     // If scrolled enough, not currently paging and not complete...
-    if(scrolled && !this.state.paging && !this.state.done) {
+    if (scrolled && !this.state.paging && !this.state.done) {
 
       // Set application state (Paging, Increment page)
       this.setState({paging: true, page: this.state.page + 1});
@@ -126,34 +124,32 @@ module.exports = TweetsApp = React.createClass({
   },
 
   // Set the initial component state
-  getInitialState: function(props){
+  getInitialState: function (props) {
 
     props = props || this.props;
 
     // Set initial application state using props
     return {
-      tweets: props.tweets,
-      count: 0,
-      page: 0,
-      paging: false,
-      skip: 0,
-      done: false
+      count  : 0,
+      page   : 0,
+      skip   : 0,
+      paging : false,
+      done   : false,
+      tweets : props.tweets
     };
 
   },
 
-  componentWillReceiveProps: function(newProps, oldProps){
+  componentWillReceiveProps: function (newProps, oldProps) {
     this.setState(this.getInitialState(newProps));
   },
 
   // Called directly after component rendering, only on client
-  componentDidMount: function(){
+  componentDidMount: function () {
 
-    // Preserve self reference
-    var self = this;
 
-    // Initialize socket.io
-    var socket = io.connect();
+    var self   = this;         // Preserve self reference
+    var socket = io.connect(); // Initialize socket.io
 
     // On tweet event emission...
     socket.on('tweet', function (data) {
@@ -169,7 +165,7 @@ module.exports = TweetsApp = React.createClass({
   },
 
   // Render the component
-  render: function(){
+  render: function () {
 
     return (
       <div className="tweets-app">

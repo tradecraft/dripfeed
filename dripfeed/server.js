@@ -1,19 +1,19 @@
 // Require our dependencies
-var express       = require('express'),
-    exphbs        = require('express-handlebars'),
-    http          = require('http'),
-    mongoose      = require('mongoose'),
-    twitter       = require('ntwitter'),
-    routes        = require('./routes'),
-    config        = require('./config'),
-    streamHandler = require('./utils/streamHandler');
+var express       = require('express');
+var exphbs        = require('express-handlebars');
+var http          = require('http');
+var mongoose      = require('mongoose');
+var twitter       = require('ntwitter');
+var routes        = require('./routes');
+var config        = require('./config');
+var streamHandler = require('./utils/streamHandler');
 
 // Create an express instance and set a port variable
-var app = express();
+var app  = express();
 var port = process.env.PORT || 8080;
 
 // Set handlebars as the templating engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 // Disable etag headers on responses
@@ -34,7 +34,7 @@ app.get('/page/:page/:skip', routes.page);
 // Set /public as our static content dir
 app.use("/", express.static(__dirname + "/public/"));
 
-// Fire this bitch up (start our server)
+// Start the server
 var server = http.createServer(app).listen(port, function() {
   console.log('Express server listening on port ' + port);
 });
@@ -43,6 +43,6 @@ var server = http.createServer(app).listen(port, function() {
 var io = require('socket.io').listen(server);
 
 // Set a stream listener for tweets matching tracking keywords
-twit.stream('statuses/filter',{ track: 'javascript'}, function(stream){
-  streamHandler(stream,io);
+twit.stream('statuses/filter', {track: 'reactjs'}, function (stream) {
+  streamHandler(stream, io);
 });
