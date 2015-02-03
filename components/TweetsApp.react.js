@@ -147,7 +147,6 @@ module.exports = TweetsApp = React.createClass({
   // Called directly after component rendering, only on client
   componentDidMount: function () {
 
-
     var self   = this;         // Preserve self reference
     var socket = io.connect(); // Initialize socket.io
 
@@ -174,7 +173,6 @@ module.exports = TweetsApp = React.createClass({
         <NotificationBar count={this.state.count} onShowNewTweets={this.showNewTweets}/>
       </div>
     )
-
   }
 
 });

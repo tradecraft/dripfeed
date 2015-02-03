@@ -3,8 +3,7 @@
 var React = require('react');
 
 module.exports = Tweet = React.createClass({
-
-  render: function(){
+  render: function () {
     var tweet = this.props.tweet;
 
     return (
@@ -26,5 +25,4 @@ module.exports = Tweet = React.createClass({
       </li>
     )
   }
-
 });

@@ -21,7 +21,5 @@ module.exports = Tweets = React.createClass({
         {content}
       </ul>
     )
-
   }
-
 });
