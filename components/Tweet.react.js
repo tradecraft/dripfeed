@@ -8,8 +8,8 @@ module.exports = Tweet = React.createClass({
 
     return (
       <li className={"tweet" + (tweet.active ? ' active' : '')}>
-        <img src={tweet.avatar} className="avatar" />
         <blockquote>
+          <img src={tweet.avatar} className="avatar" />
           <cite>
             <a href={"http://www.twitter.com/" + tweet.screenname}>
               {tweet.author}
