@@ -43,6 +43,6 @@ var server = http.createServer(app).listen(port, function () {
 var io = require('socket.io').listen(server);
 
 // Set a stream listener for tweets matching tracking keywords
-twit.stream('statuses/filter', {track: 'nyc'}, function (stream) {
+twit.stream('statuses/filter', {track: 'javascript'}, function (stream) {
   streamHandler(stream, io);
 });

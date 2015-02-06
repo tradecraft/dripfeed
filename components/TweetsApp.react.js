@@ -20,7 +20,6 @@ module.exports = TweetsApp = React.createClass({
 
     // Set application state
     this.setState({tweets: updated, count: count, skip: skip});
-
   },
 
   // Method to get JSON from server by page
@@ -50,7 +49,6 @@ module.exports = TweetsApp = React.createClass({
 
     // Send it
     request.send();
-
   },
 
   // Method to show the unread tweets
@@ -66,13 +64,11 @@ module.exports = TweetsApp = React.createClass({
 
     // Set application state (active tweets + reset unread count)
     this.setState({tweets: updated, count: 0});
-
   },
 
   // Method to load tweets fetched from the server
   loadPagedTweets: function (tweets) {
 
-    // So meta lol
     var self = this;
 
     // If we still have tweets...
@@ -86,20 +82,15 @@ module.exports = TweetsApp = React.createClass({
         updated.push(tweet);
       });
 
-      // This app is so fast, I actually use a timeout for dramatic effect
-      // Otherwise you'd never see our super sexy loader svg
+      // Show loader svg helper
       setTimeout(function () {
-
-        // Set application state (Not paging, add tweets)
         self.setState({tweets: updated, paging: false});
-
       }, 1000);
 
     } else {
 
       // Set application state (Not paging, paging complete)
       this.setState({done: true, paging: false});
-
     }
   },
 
