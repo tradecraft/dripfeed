@@ -28,7 +28,7 @@ sudo npm install
 node server
 ```
 
-If no errors, navigate to localhost:8080 in a Chrome browser and everything should be working.
+If no errors, navigate to localhost:8080 in a Chrome browser and everything should be working
 
 # Questions
 
