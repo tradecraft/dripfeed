@@ -139,10 +139,10 @@ body
   float: left;
 
   width: 32px;
-  margin: 10px;
+  margin-bottom: 10px;
 
   /*border: 1px solid #000;*/
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 .tweet blockquote
