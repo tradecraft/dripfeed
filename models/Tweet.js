@@ -21,7 +21,7 @@ schema.statics.getTweets = function (page, skip, callback) {
   Tweet.find({}, 'twid active author avatar body date screenname', {skip: start, limit: 10})
   .sort({date: 'desc'}).exec(function (err, docs) {
 
-    // If everything is cool...
+    // If no errors
     if (!err) {
       tweets = docs;  // We got tweets
       tweets.forEach(function (tweet) {

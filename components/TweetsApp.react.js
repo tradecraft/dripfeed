@@ -33,7 +33,7 @@ module.exports = TweetsApp = React.createClass({
     request.open('GET', 'page/' + page + "/" + this.state.skip, true);
     request.onload = function () {
 
-      // If everything is cool...
+      // If no errors
       if (request.status >= 200 && request.status < 400) {
 
         // Load our next page
